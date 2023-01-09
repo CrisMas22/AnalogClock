@@ -1,8 +1,14 @@
 package com.example.javafxdemo;
 
 import javafx.application.Application;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ColorPicker;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -11,19 +17,25 @@ import java.io.IOException;
 
 public class HelloApplication extends Application {
     @Override
-    public void start(Stage stage) throws IOException {   //Interface
-        //FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        //Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        //stage.setTitle("Hello!");
-        //stage.setScene(scene);
+    public void start(Stage stage) {   //Interface
+
         Clock clock = new Clock();
-        Scene scene = new Scene(clock);
+
+        ColorPicker colorPicker = new ColorPicker();colorPicker.setOnAction((EventHandler) t -> clock.moon.setFill(colorPicker.getValue()));
+
+        Group root = new Group();
+        root.getChildren().add(clock);
+        root.getChildren().add(colorPicker);
+
+        Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("StyleSheet.css").toExternalForm()); //I'm crying!This one worked, but i don't understand it
-        //scene.setFill(Color.TOMATO);            //Color in background of the clock
+        scene.setFill(Color.DARKSLATEBLUE);            //Color in background of the clock
         //https://stackoverflow.com/questions/40792476/intellij-idea-how-to-open-css-filelike-application-css
         stage.setResizable(false);                  //to avoid the change of the size
         stage.setTitle("Clock");
-        stage.initStyle(StageStyle.UTILITY);
+        stage.getIcons().add(new Image("C:/users/mjaki/IdeaProjects/AnalogueClock/programming.png"));
+        stage.initStyle(StageStyle.DECORATED);
+
         stage.setScene(scene);
         stage.show();
     }
@@ -35,23 +47,8 @@ public class HelloApplication extends Application {
 
 }
 
-/*import javafx.animation.*;
-import javafx.application.Application;
-import javafx.event.*;
-import javafx.geometry.Pos;
-import javafx.scene.*;
-import javafx.scene.control.Label;
-import javafx.scene.effect.Glow;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.*;
-import javafx.scene.transform.Rotate;
-import javafx.stage.*;
-import javafx.util.Duration;
 
-import java.util.*;
 
 /** Note that this clock does not keep perfect time, but is close.
- It's main purpose is to demonstrate various features of JavaFX. */
+ Its main purpose is to demonstrate various features of JavaFX. */
 
