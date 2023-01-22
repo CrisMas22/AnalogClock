@@ -16,22 +16,22 @@ import javafx.util.Duration;
 import java.util.Calendar;
 
 public class Clock extends Parent {
-    StackPane stackPane = new StackPane(); //container of elements
-    Group group = new Group();
-    Circle moon = new Circle(220, Color.SLATEGRAY);
+    protected StackPane stackPane = new StackPane(); //container of elements
+    protected Group group = new Group();
+    protected Circle moon = new Circle(220, Color.WHITESMOKE);
     //We create clock hands
-    Dial secondHand = new Dial(200, 50, 5, Color.CRIMSON);
-    Dial minuteHand = new Dial(150, 40, 10, Color.BLACK);
-    Dial hourHand = new Dial(100, 30, 15, Color.BLACK);
+    protected Dial secondHand = new Dial(200, 50, 5, Color.CRIMSON);
+    protected Dial minuteHand = new Dial(150, 40, 10, Color.BLACK);
+    protected Dial hourHand = new Dial(100, 30, 15, Color.BLACK);
 
-    Calendar calendar;      //created directly after the method
+    protected Calendar calendar;      //created directly after the method
 
     public Clock() {
         layoult();
     }
 
     // design clock (circles)
-    public void layoult() {
+    private void layoult() {
         Circle outline = new Circle(240, Color.BLACK); //first element = outline of the clock
         outline.setEffect(new Lighting());
         moon.setEffect(new InnerShadow());
@@ -55,10 +55,11 @@ public class Clock extends Parent {
         //to create the lines which show the hours
         Rectangle[] tickHour = new Rectangle[12];
         for (int i = 0; i < 12; i++) {
-            tickHour[i] = new Rectangle(20, 5, Color.BLUE);
+            tickHour[i] = new Rectangle(20, 5, Color.BLACK);
             tickHour[i].setTranslateX(190 * Math.cos(-(Math.PI / 6) * i));  //the lines stay all in a line
             tickHour[i].setTranslateY(190 * Math.sin(-(Math.PI / 6) * i));  // also with this one, all the line find their place around the circle
             tickHour[i].setRotate(-(180 / 6) * i);                         // now the lines have a perfect rotation
+            tickHour[i].setStroke(Color.WHITESMOKE);
         }
         stackPane.getChildren().addAll(tickHour);
 
@@ -68,19 +69,19 @@ public class Clock extends Parent {
             if (i % 5 == 0) {
                 continue;
             }
-            tickMinutes[i] = new Rectangle(10, 2, Color.BLUE);
+            tickMinutes[i] = new Rectangle(10, 2, Color.BLACK);
             tickMinutes[i].setTranslateX(190 * Math.cos(-(Math.PI / 30) * i));  //the lines stay all in a line
             tickMinutes[i].setTranslateY(190 * Math.sin(-(Math.PI / 30) * i));  // also with this one, all the line find their place around the circle
             tickMinutes[i].setRotate(-(180 / 30) * i);                         // now the lines have a perfect rotation
             stackPane.getChildren().add(tickMinutes[i]);
+            tickMinutes[i].setStroke(Color.WHITESMOKE);
         }
         group.getChildren().add(stackPane);
         group.getChildren().addAll(hourHand, minuteHand, secondHand);
 
         //little circles in the middle, we can delete it
-        group.getChildren().add(new Circle(240, 240, 10, Color.BLUE));
+        group.getChildren().add(new Circle(240, 240, 10, Color.PURPLE));
         group.getChildren().add(new Circle(240, 240, 5, Color.BLACK));
-
 
         this.getChildren().add(group);               // then addAll + outline and moon (all the circles)
         // I didn't understand get.children().add(stackPane)
@@ -105,7 +106,7 @@ public class Clock extends Parent {
 
     }//Control the movement of the secondHand's clock
 
-    public void executeClock() {
+    private void executeClock() {
         Timeline primaryLine = new Timeline();
         Timeline secondLine = new Timeline();
 

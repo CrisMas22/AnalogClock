@@ -31,10 +31,8 @@ public class HelloApplication extends Application {
         ColorPicker colorPickerBackground = new ColorPicker();
         colorPickerBackground.setOnAction((EventHandler) t -> scene.setFill(colorPickerBackground.getValue()));
 
-        if (clock.moon.getStroke() == clock.hourHand.getStroke()) {
-            clock.hourHand.setStroke(Color.WHITESMOKE);
-            clock.minuteHand.setStroke(Color.WHITESMOKE);
-        }
+        clock.hourHand.setStroke(Color.WHITESMOKE);
+        clock.minuteHand.setStroke(Color.WHITESMOKE);
 
         root.getChildren().add(colorPickerBackground);
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("StyleSheet.css")).toExternalForm());
