@@ -11,7 +11,7 @@ public class Dial extends Rectangle {
     public Dial(double body, double tail, double width,  Paint fill) {
         super(width, body, fill);
         this.setX(240-width/2);
-        this.setY(240-body);
+        this.setY(240-(body/*-tail*/));
         this.setEffect(new DropShadow());
         this.setArcHeight(width);
         this.setArcWidth(width);
