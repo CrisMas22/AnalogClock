@@ -3,4 +3,6 @@ Text{
     -fx-font-family: "Arial";
     -fx-fill: purple;
     -fx-font-weight: bold;
+    -fx-effect: dropshadow( one-pass-box , whitesmoke , 2 , 0.0 , 5 , 0 );
 }
+
